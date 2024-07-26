@@ -20,6 +20,7 @@ public class Operations {
 			
 		}
 	}
+	//Inserting operation
 	public static int insert() throws SQLException{
 		Connection con = DbConnection.getConnection();
 		String emp_name , email , designation;
@@ -36,7 +37,7 @@ public class Operations {
 		designation = sc.nextLine();
 		System.out.println("Salary : ");
 		salary = sc.nextInt();
-		
+		//Insert vlaues into database 
 		String query = "INSERT INTO employee(emp_id,emp_name,email,designation,salary) VALUES(?,?,?,?,?)";
 		PreparedStatement pst = con.prepareStatement(query);
 		pst.setInt(1, emp_id);
@@ -49,10 +50,11 @@ public class Operations {
 		
 		
 	}
+	//Deletion operation
 	public static int delete() throws SQLException{
 		System.out.println("Deleting Employee....");
 	    System.out.println("Enter Employee ID to delete:");
-	    int emp_id = sc.nextInt();
+	    int emp_id = sc.nextInt();//enter the employee id which id want to delete 
 	    String query = "DELETE FROM employee WHERE emp_id = ?";
 	    PreparedStatement pst = con.prepareStatement(query);
 	    pst.setInt(1, emp_id);
@@ -60,17 +62,19 @@ public class Operations {
 	    int rows_affected = pst.executeUpdate();
 	    return rows_affected;
 	}
+	//show operation
 	public static void show() throws SQLException {
         System.out.println("Fetching Employee Details....");
         System.out.println("1. Show All Employees");
         System.out.println("2. Show Specific Employee by ID");
         int choice = sc.nextInt();
-        
+        //Show all employee details
         if (choice == 1) {
             String query = "SELECT * FROM employee";
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
-            if (!rs.isBeforeFirst()) { 
+            //checks whether the database is empty 
+            if (!rs.isBeforeFirst()) {
                 System.out.println("No employees found in the database.");
             } else {
                 while (rs.next()) {
@@ -87,6 +91,7 @@ public class Operations {
                     System.out.println("Salary: " + salary);
                     System.out.println("--------------------");
                 }
+                
             }
             
         } else if (choice == 2) {

@@ -6,6 +6,7 @@ public class Main {
 	{
 		Scanner sc = new Scanner(System.in);
 		int option;
+		String choice;
 		boolean exit = false;
 		System.out.println("Employee Management");
 		while(!exit)
@@ -34,6 +35,18 @@ public class Main {
 			default:
 				System.out.println("Invalid option...Choose above option only");
 			}
+			System.out.print("Do you want to continue this operation (Y/N)? ");
+	        choice = sc.nextLine().trim().toLowerCase();
+
+	        // Check the user's input
+	        if (choice.equals("y")) {
+	            continue;
+	        } else if (choice.equals("n")) {
+	            System.out.println("Ending the operation.");
+	            break;
+	        } else {
+	            System.out.println("Invalid input. Please enter 'Y' or 'N'.");
+	        }
 		}
 		sc.close();
 	}
